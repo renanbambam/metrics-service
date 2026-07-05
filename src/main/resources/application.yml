@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: metrics-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/metrics
+    username: metrics
+    password: metrics
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    prometheus:
+      enabled: true
+
+server:
+  port: 8080
